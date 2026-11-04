@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f1f1;
+            color: #2d2d2d;
+        }
+
+        .topbar {
+            height: 48px;
+            background: #1e2430;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            color: #f5f5f5;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .topbar .title {
+            margin-left: 10px;
+        }
+
+        .page {
+            min-height: calc(100vh - 48px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #efefef;
+            padding: 24px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid #d9d9d9;
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            padding: 30px 26px 22px;
+        }
+
+        h2 {
+            text-align: center;
+            margin: 0 0 24px;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1d1d1d;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            height: 40px;
+            border: 1px solid #b9b9b9;
+            border-radius: 6px;
+            background: #f8f8f8;
+            padding: 0 12px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #8c8c8c;
+            background: #fff;
+        }
+
+        .login-button {
+            width: 100%;
+            height: 42px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 6px;
+            background: #324a5f;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .login-button:hover {
+            background: #2a3d50;
+        }
+
+        .messages {
+            margin: 0 0 18px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .messages li {
+            background: #fff2f2;
+            color: #b00020;
+            border: 1px solid #f0b4b4;
+            border-radius: 6px;
+            padding: 10px 12px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <span>Notes</span>
+    </div>
+
+    <div class="page">
+        <div class="login-card">
+            <h2>Log in</h2>
+
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+                <button type="submit" class="login-button">Log in</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

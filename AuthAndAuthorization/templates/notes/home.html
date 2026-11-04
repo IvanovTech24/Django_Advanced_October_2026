@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f2f5;
+            color: #2d2d2d;
+        }
+
+        .topbar {
+            min-height: 56px;
+            background: #34404e;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .topbar .left {
+            font-size: 1.25rem;
+        }
+
+        .topbar .right {
+            font-size: 0.95rem;
+        }
+
+        .content {
+            min-height: calc(100vh - 56px);
+            background: #f1f2f5;
+            padding: 46px 20px 40px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 760px;
+            background: #fff;
+            border: 1px solid #eceef0;
+            border-radius: 8px;
+            padding: 30px 32px;
+            margin: 0 auto;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .card h2 {
+            margin: 0 0 18px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #252525;
+        }
+
+        .status {
+            border-radius: 4px;
+            padding: 11px 14px;
+            font-size: 0.95rem;
+            margin-bottom: 22px;
+        }
+
+        .status.success {
+            background: #eaf4eb;
+            color: #456b4c;
+        }
+
+        .status.guest {
+            background: #fbefed;
+            color: #714d47;
+            margin-bottom: 22px;
+        }
+
+        .user-info {
+            margin-top: 0;
+            color: #2d2d2d;
+            font-size: 0.96rem;
+        }
+
+        .user-info .row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 6px;
+            min-height: 20px;
+        }
+
+        .notes-section {
+            margin-top: 30px;
+            border-top: 1px solid #ececec;
+            padding-top: 24px;
+        }
+
+        .notes-heading {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px !important;
+        }
+
+        .notes-count {
+            display: inline-flex;
+            min-width: 24px;
+            height: 24px;
+            align-items: center;
+            justify-content: center;
+            padding: 0 7px;
+            border-radius: 12px;
+            background: #eef0f2;
+            color: #4b5563;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .note-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .note {
+            padding: 15px 17px;
+            border: 1px solid #e3e5e8;
+            border-left: 4px solid #424b55;
+            border-radius: 7px;
+            background: #fafafc;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.025);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        }
+
+        .note:hover {
+            border-left-color: #52779c;
+            box-shadow: 0 5px 14px rgba(31, 41, 55, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .note-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 7px;
+        }
+
+        .note h3 {
+            margin: 0;
+            font-size: 1.05rem;
+            line-height: 1.4;
+            color: #252a30;
+        }
+
+        .note p {
+            margin: 0;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            color: #454a50;
+        }
+
+        .note-owner {
+            flex: 0 0 auto;
+            color: #737a83;
+            font-size: 0.85rem;
+        }
+
+        .label {
+            width: 78px;
+            flex: 0 0 78px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .value {
+            color: #1f1f1f;
+            overflow-wrap: anywhere;
+        }
+
+        .logout-footer {
+            display: flex;
+            justify-content: flex-end;
+            border-top: 1px solid #ececec;
+            margin-top: 28px;
+            padding-top: 22px;
+        }
+
+        .logout-form {
+            margin: 0;
+        }
+
+        .logout-button {
+            border: 0;
+            border-radius: 5px;
+            padding: 10px 22px;
+            background: #b64a45;
+            color: #fff;
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .logout-button:hover {
+            background: #9f3c38;
+        }
+
+        .logout-button:focus-visible {
+            outline: 2px solid #34404e;
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 600px) {
+            .topbar {
+                padding: 0 18px;
+            }
+
+            .content {
+                padding: 28px 14px;
+            }
+
+            .card {
+                padding: 24px 20px;
+            }
+
+            .note {
+                padding: 14px;
+            }
+
+            .note-header {
+                align-items: flex-start;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <div class="left">Notes</div>
+        <div class="right">
+            {% if user.is_authenticated %}
+                Hello, {{ user.username }}
+            {% else %}
+                Hello, guest
+            {% endif %}
+        </div>
+    </div>
+
+    <main class="content">
+        <div class="card">
+            <h2>Welcome to Notes</h2>
+
+            <div class="status success">You are logged in.</div>
+
+{#            <div class="user-info">#}
+{#                <div class="row">#}
+{#                    <span class="label">Username</span>#}
+{#                    <span class="value">{{ user.username }}</span>#}
+{#                </div>#}
+{#                <div class="row">#}
+{#                    <span class="label">Email</span>#}
+{#                    <span class="value">{{ user.email }}</span>#}
+{#                </div>#}
+{#                <div class="row">#}
+{#                    <span class="label">Staff</span>#}
+{#                    <span class="value">{{ user.is_staff|yesno:'Yes,No' }}</span>#}
+{#                </div>#}
+{#                <div class="row">#}
+{#                    <span class="label">Superuser</span>#}
+{#                    <span class="value">{{ user.is_superuser|yesno:'Yes,No' }}</span>#}
+{#                </div>#}
+{#                <div class="row">#}
+{#                    <span class="label">Last login</span>#}
+{#                    <span class="value">{{ user.last_login|date:'d M Y, H:i' }}</span>#}
+{#                </div>#}
+{#            </div>#}
+
+            <section class="notes-section">
+                <h2 class="notes-heading">Notes <span class="notes-count">{{ object_list|length }}</span></h2>
+                {% if object_list %}
+                    <div class="note-list">
+                        {% for note in object_list %}
+                            <article class="note">
+                                <div class="note-header">
+                                    <h3>{{ note.title }}</h3>
+                                    <span class="note-owner">{{ note.owner.username }}</span>
+                                </div>
+                                <p>{{ note.body }}</p>
+                            </article>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>You don't have any notes yet.</p>
+                {% endif %}
+            </section>
+
+            <div class="logout-footer">
+                <form class="logout-form" method="post" action="{% url 'cbv-logout' %}">
+                    {% csrf_token %}
+                    <button class="logout-button" type="submit">Log out</button>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
